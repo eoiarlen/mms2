@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outras Drogas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e1b4b, transparent 50%),
+                              radial-gradient(circle at bottom left, #064e3b, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-align: center;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .dev-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .image-drug{
+            width: 72px;
+            height: 72px;
+            max-width: 72px;
+            object-fit: cover;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto 16px auto;
+            position: static;
+        }
+            
+        /* Tela de Fórmulas / Aulas */
+        .formulas-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 5px;
+        }
+
+        .formula-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 14px;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .formula-item h3 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .formula-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            text-align: left;
+        }
+
+        .math-box {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: 600;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* Top Bar do Jogo */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            background: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .lives {
+            color: var(--danger);
+            letter-spacing: 3px;
+        }
+
+        .question-card {
+
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 14px 18px;
+            text-align: left;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--primary);
+        }
+
+        .option-btn.correct {
+            background: var(--accent) !important;
+            border-color: var(--accent) !important;
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: var(--danger) !important;
+            border-color: var(--danger) !important;
+            color: white;
+        }
+
+        .score-summary {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-summary h2 {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        /* Carrossel de Slides - Tela de Estudo */
+        .study-slides-wrapper {
+            position: relative;
+            min-height: 320px;
+            margin-bottom: 16px;
+        }
+
+        .study-slide {
+            display: none;
+            animation: fadeIn 0.35s ease-in-out;
+        }
+
+        .study-slide.active {
+            display: block;
+        }
+
+        .slide-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .study-slide h2 {
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .study-slide p {
+            text-align: left;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .study-slide ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .study-slide li {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .study-slide li strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.9rem;
+        }
+
+        .slide-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .slide-nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+
+        .slide-nav-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .slide-nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .slide-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .slide-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .slide-dot.active {
+            background: var(--primary);
+            width: 22px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- TELA INICIAL -->
+        <div id="start-screen" class="screen active">
+            <div class="dev-tag">Grupo 1</div>
+            <h1>Outras Drogas</h1>
+            <img src="/img/drogas.png" alt="drugs" class="image-drug">
+            <p>Teste seus conhecimentos sobre drogas e relacionados.</p>
+            <button class="btn" onclick="showFormulas()">📖 Estudar Sobre</button>
+            <button class="btn btn-secondary" onclick="startGame()">Começar Desafio Direto</button>
+        </div>
+
+        <!-- TELA DE ENSINO / SLIDES DE ESTUDO -->
+        <div id="formulas-screen" class="screen">
+            <h1>Guia de Estudo 📚</h1>
+            <p>Navegue pelos slides para entender o tema antes de jogar.</p>
+
+            <div class="slide-nav">
+                <button class="slide-nav-btn" id="prev-slide-btn" onclick="prevSlide()">← Anterior</button>
+                <button class="slide-nav-btn" id="next-slide-btn" onclick="nextSlide()">Próximo →</button>
+            </div>
+
+            <div class="study-slides-wrapper">
+                <!-- SLIDE 1 -->
+                <div class="study-slide active" data-slide="0">
+                    <span class="slide-tag">Introdução</span>
+                    <h2>O que são drogas?</h2>
+                    <p>Segundo a Organização Mundial da Saúde, droga é qualquer substância que não é produzida pelo corpo e que muda o seu jeito de funcionar, seja no corpo ou na mente.</p>
+                    <ul>
+                        <li><strong>Lícitas</strong>Permitidas por lei, como álcool e tabaco.</li>
+                        <li><strong>Ilícitas</strong>Proibidas por lei, como cocaína e maconha.</li>
+                        <li><strong>Uso terapêutico</strong>Medicamentos controlados, usados sob prescrição médica.</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="study-slide" data-slide="1">
+                    <span class="slide-tag">Classificação</span>
+                    <h2>Como as drogas são classificadas</h2>
+                    <p>De acordo com o efeito no sistema nervoso central, as drogas se dividem em três grandes grupos.</p>
+                    <ul>
+                        <li><strong>Depressoras</strong>Diminuem a atividade cerebral (álcool, benzodiazepínicos, opioides).</li>
+                        <li><strong>Estimulantes</strong>Aceleram a atividade cerebral (cocaína, anfetaminas, cafeína).</li>
+                        <li><strong>Perturbadoras</strong>Alteram a percepção da realidade (LSD, maconha, ecstasy).</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="study-slide" data-slide="2">
+                    <span class="slide-tag">Efeitos</span>
+                    <h2>Efeitos no organismo</h2>
+                    <p>O uso pode causar efeitos de curto e longo prazo, variando de acordo com a substância e a frequência de uso.</p>
+                    <ul>
+                        <li><strong>Curto prazo</strong>Alterações de humor, atenção, coordenação motora e percepção.</li>
+                        <li><strong>Longo prazo</strong>Dependência química, danos a órgãos e prejuízos cognitivos.</li>
+                        <li><strong>Riscos sociais</strong>Impactos em relações familiares, trabalho e estudos.</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 4 -->
+                <div class="study-slide" data-slide="3">
+                    <span class="slide-tag">Fatores de Risco</span>
+                    <h2>Por que o uso acontece?</h2>
+                    <p>Diversos fatores podem influenciar a aproximação de uma pessoa com drogas.</p>
+                    <ul>
+                        <li><strong>Individuais</strong>Curiosidade, busca por prazer ou fuga de problemas.</li>
+                        <li><strong>Sociais</strong>Pressão de grupo, ambiente familiar e acesso facilitado.</li>
+                        <li><strong>Psicológicos</strong>Ansiedade, depressão e outros sofrimentos emocionais.</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 5 -->
+                <div class="study-slide" data-slide="4">
+                    <span class="slide-tag">Prevenção</span>
+                    <h2>Prevenção e onde buscar ajuda</h2>
+                    <p>Informação, diálogo e apoio são as principais ferramentas de prevenção.</p>
+                    <ul>
+                        <li><strong>Diálogo aberto</strong>Conversar sem julgamento em casa e na escola.</li>
+                        <li><strong>Redes de apoio</strong>Família, amigos e profissionais de saúde.</li>
+                        <li><strong>CAPS e CVV</strong>Serviços públicos de apoio e escuta (188 - Centro de Valorização da Vida).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="slide-dots" id="slide-dots"></div>
+
+            <button class="btn" onclick="startGame()">Ir para o Jogo 🚀</button>
+            <button class="btn btn-secondary" onclick="backToStart()">Voltar ao Início</button>
+        </div>
+
+        <!-- TELA DO JOGO -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <span id="level-badge" class="badge">Iniciante</span>
+                <span>Pontos: <strong id="score">0</strong></span>
+                <span class="lives" id="lives">❤️❤️❤️</span>
+            </div>
+
+            <div class="question-card" id="question-text">
+                Carregando questão...
+            </div>
+
+            <div class="options-grid" id="options-container">
+                <!-- Preenchido via JavaScript -->
+            </div>
+
+            <button class="btn btn-secondary" style="padding: 10px; font-size: 0.85rem;" onclick="showFormulasFromGame()">📖 Ver Guia de Fórmulas</button>
+        </div>
+
+        <!-- TELA DE GAME OVER -->
+        <div id="gameover-screen" class="screen">
+            <h1>Fim de Jogo 📊</h1>
+            <p>Você esgotou suas vidas, mas o aprendizado continua!</p>
+            
+            <div class="score-summary">
+                <h2 id="final-score">0</h2>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Pontuação Final</span>
+            </div>
+
+            <button class="btn" onclick="startGame()">Tentar Novamente</button>
+            <button class="btn btn-secondary" onclick="backToStart()">Voltar ao Menu</button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let lives = 3;
+        let currentQuestion = null;
+        let gameWasActive = false;
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.study-slide').length;
+
+        function renderDots() {
+            const dotsContainer = document.getElementById('slide-dots');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'slide-dot' + (i === currentSlide ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateSlideUI() {
+            document.querySelectorAll('.study-slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            document.getElementById('prev-slide-btn').disabled = currentSlide === 0;
+            document.getElementById('next-slide-btn').disabled = currentSlide === totalSlides - 1;
+            renderDots();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideUI();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        // Cada questão tem 2 opções fixas de texto e o índice (0 ou 1) da correta.
+        // Não há cálculo: a resposta certa é sempre a que estiver marcada em "correct".
+        const questionBank = [
+            {
+                level: "Iniciante",
+                text: "O álcool é classificado como uma droga:",
+                options: ["Depressora do sistema nervoso central", "Estimulante do sistema nervoso central"],
+                correct: 0
+            },
+            {
+                level: "Iniciante",
+                text: "A cafeína é um exemplo de droga:",
+                options: ["Estimulante", "Depressora"],
+                correct: 0
+            },
+            {
+                level: "Iniciante",
+                text: "O tabaco é uma droga:",
+                options: ["Lícita (permitida por lei)", "Ilícita (proibida por lei)"],
+                correct: 0
+            },
+            {
+                level: "Intermediário",
+                text: "O LSD é classificado como uma droga:",
+                options: ["Perturbadora (alucinógena) do sistema nervoso central", "Depressora do sistema nervoso central"],
+                correct: 0
+            },
+            {
+                level: "Intermediário",
+                text: "A cocaína é classificada como droga:",
+                options: ["Estimulante", "Depressora"],
+                correct: 0
+            },
+            {
+                level: "Intermediário",
+                text: "Segundo a Organização Mundial da Saúde, uma droga é:",
+                options: ["Qualquer substância que altera o funcionamento do corpo ou da mente", "Apenas as substâncias consideradas ilegais"],
+                correct: 0
+            },
+            {
+                level: "Avançado",
+                text: "Um dos principais fatores de risco sociais para o uso de drogas é:",
+                options: ["Pressão do grupo de amigos", "Prática regular de esportes"],
+                correct: 0
+            },
+            {
+                level: "Avançado",
+                text: "Diante de um caso de dependência química, buscar ajuda profissional é:",
+                options: ["Um passo importante e recomendado", "Desnecessário, a pessoa deve resolver sozinha"],
+                correct: 0
+            },
+            {
+                level: "Avançado",
+                text: "O CVV (Centro de Valorização da Vida), serviço de apoio emocional, atende pelo número:",
+                options: ["188", "190"],
+                correct: 0
+            }
+        ];
+
+        function showFormulas() {
+            gameWasActive = false;
+            currentSlide = 0;
+            updateSlideUI();
+            document.getElementById('start-screen').classList.remove('active');
+            document.getElementById('formulas-screen').classList.add('active');
+        }
+
+        function showFormulasFromGame() {
+            gameWasActive = true;
+            currentSlide = 0;
+            updateSlideUI();
+            document.getElementById('game-screen').classList.remove('active');
+            document.getElementById('formulas-screen').classList.add('active');
+        }
+
+        function backToStart() {
+            gameWasActive = false;                                        // ← novo
+            document.getElementById('formulas-screen').classList.remove('active');
+            document.getElementById('game-screen').classList.remove('active');   // ← novo
+            document.getElementById('gameover-screen').classList.remove('active');
+            document.getElementById('start-screen').classList.add('active');
+        }
+
+        function startGame() {
+            if (gameWasActive) {
+            document.getElementById('start-screen').classList.remove('active');      // ← novo
+            document.getElementById('formulas-screen').classList.remove('active');
+            document.getElementById('gameover-screen').classList.remove('active');   // ← novo
+            document.getElementById('game-screen').classList.add('active');
+            gameWasActive = false;
+            return;
+            }
+
+            score = 0;
+            lives = 3;
+            updateUI();
+            
+            document.getElementById('start-screen').classList.remove('active');
+            document.getElementById('formulas-screen').classList.remove('active');
+            document.getElementById('gameover-screen').classList.remove('active');
+            document.getElementById('game-screen').classList.add('active');
+
+            loadNextQuestion();
+        }
+
+        function updateUI() {
+            document.getElementById('score').innerText = score;
+            document.getElementById('lives').innerText = '❤️'.repeat(lives);
+        }
+
+        function loadNextQuestion() {
+            const qData = questionBank[Math.floor(Math.random() * questionBank.length)];
+            currentQuestion = qData;
+
+            document.getElementById('level-badge').innerText = qData.level;
+            document.getElementById('question-text').innerHTML = qData.text;
+
+            generateOptions(qData.options, qData.correct);
+        }
+
+        function generateOptions(options, correctIndex) {
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Embaralha a ordem de exibição, mantendo o vínculo com o índice original
+            const order = options.map((text, index) => ({ text, index }));
+            order.sort(() => Math.random() - 0.5);
+
+            order.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = opt.text;
+                btn.onclick = () => checkAnswer(opt.index, correctIndex, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex, correctIndex, buttonElement) {
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                buttonElement.classList.add('correct');
+                score += 20;
+                setTimeout(loadNextQuestion, 1000);
+            } else {
+                buttonElement.classList.add('wrong');
+                buttons.forEach(b => {
+                    if (b.innerText === currentQuestion.options[correctIndex]) {
+                        b.classList.add('correct');
+                    }
+                });
+                lives--;
+                setTimeout(() => {
+                    if (lives <= 0) {
+                        endGame();
+                    } else {
+                        loadNextQuestion();
+                    }
+                }, 1500);
+            }
+            updateUI();
+        }
+
+        function endGame() {
+            document.getElementById('game-screen').classList.remove('active');
+            document.getElementById('gameover-screen').classList.add('active');
+            document.getElementById('final-score').innerText = score;
+        }
+
+        // Inicializa os controles do carrossel de estudo
+        updateSlideUI();
+    </script>
+</body>
+</html>
