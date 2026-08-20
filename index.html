@@ -261,10 +261,19 @@
             margin-bottom: 5px;
         }
 
+        .question-image {
+            width: 100%;
+            max-width: 320px;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto 16px auto;
+        }
+
         /* Carrossel de Slides - Tela de Estudo */
         .study-slides-wrapper {
             position: relative;
-            min-height: 320px;
             margin-bottom: 16px;
         }
 
@@ -328,6 +337,18 @@
             font-size: 0.9rem;
         }
 
+        .palavras ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+            gap: 16px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .palavras li {
+        background: none !important;
+        text-align: center;
+        }
         .slide-nav {
             display: flex;
             align-items: center;
@@ -409,61 +430,90 @@
             <div class="study-slides-wrapper">
                 <!-- SLIDE 1 -->
                 <div class="study-slide active" data-slide="0">
-                    <span class="slide-tag">Introdução</span>
-                    <h2>O que são drogas?</h2>
-                    <p>Segundo a Organização Mundial da Saúde, droga é qualquer substância que não é produzida pelo corpo e que muda o seu jeito de funcionar, seja no corpo ou na mente.</p>
-                    <ul>
-                        <li><strong>Lícitas</strong>Permitidas por lei, como álcool e tabaco.</li>
-                        <li><strong>Ilícitas</strong>Proibidas por lei, como cocaína e maconha.</li>
-                        <li><strong>Uso terapêutico</strong>Medicamentos controlados, usados sob prescrição médica.</li>
-                    </ul>
+                    <span class="slide-tag">Introdução / Conceito</span>
+                    <h2>O Que São Drogas?</h2>
+                    <p>Segundo a Organização Mundial da Saúde, <u>droga é qualquer substância que não é produzida pelo corpo e que muda o seu jeito de funcionar, seja no corpo ou na mente.</u></p>
+                    <div class="palavras">
+                        <ul>
+                        <li><strong>Cafeína </strong></li>
+                        <li><strong>Álcool</strong></li>
+                        <li><strong>Nicotina</strong></li>
+                        <li><strong>Cannabis</strong></li>
+                        <li><strong>Cocaína</strong></li>
+                        <li><strong>Crack</strong></li>
+                        <li><strong>MDMA</strong></li>
+                        <li><strong>LSD</strong></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- SLIDE 2 -->
                 <div class="study-slide" data-slide="1">
-                    <span class="slide-tag">Classificação</span>
-                    <h2>Como as drogas são classificadas</h2>
-                    <p>De acordo com o efeito no sistema nervoso central, as drogas se dividem em três grandes grupos.</p>
+                    <span class="slide-tag">Efeitos / Funcionamento</span>
+                    <h2>Como as Drogas Afetam o Cérebro</h2>
+                    <p>As drogas alteram o funcionamento do cérebro interferindo na forma como os neurônios conversam entre si, usando a química do próprio corpo contra ele mesmo.</p>
                     <ul>
-                        <li><strong>Depressoras</strong>Diminuem a atividade cerebral (álcool, benzodiazepínicos, opioides).</li>
-                        <li><strong>Estimulantes</strong>Aceleram a atividade cerebral (cocaína, anfetaminas, cafeína).</li>
-                        <li><strong>Perturbadoras</strong>Alteram a percepção da realidade (LSD, maconha, ecstasy).</li>
+                        <li><strong>Neurônios</strong>As drogas alteram a comunicação entre as células nervosas, enviando sinais falsos ou sobrecarregando os circuitos do cérebro.</li>
+                        <li><strong>Neurotransmissores</strong>Causam picos descontrolados de substâncias químicas como a dopamina (prazer) e desregulam o GABA/Glutamato (foco e controle motor).</li>
+                        <li><strong>Sistema de Recompensa</strong>O cérebro é "enganado" e entende a droga como prioridade para a sobrevivência. Com o tempo, perde o autocontrole e exige doses cada vez maiores (tolerância).</li>
                     </ul>
                 </div>
 
                 <!-- SLIDE 3 -->
                 <div class="study-slide" data-slide="2">
-                    <span class="slide-tag">Efeitos</span>
-                    <h2>Efeitos no organismo</h2>
-                    <p>O uso pode causar efeitos de curto e longo prazo, variando de acordo com a substância e a frequência de uso.</p>
+                    <span class="slide-tag">Classificação / Efeitos</span>
+                    <h2>Tipos de Drogas e seus Efeitos</h2>
+                    <!--<p></p>--->
                     <ul>
-                        <li><strong>Curto prazo</strong>Alterações de humor, atenção, coordenação motora e percepção.</li>
-                        <li><strong>Longo prazo</strong>Dependência química, danos a órgãos e prejuízos cognitivos.</li>
-                        <li><strong>Riscos sociais</strong>Impactos em relações familiares, trabalho e estudos.</li>
+                        <li><strong>Depressoras</strong>Diminuem a atividade do Sistema Nervoso Central. Desaceleram o pensamento, os reflexos e geram sensação de calma, sonolência e lentidão.</li>
+                        <li><strong>Estimulantes</strong>Aumentam o ritmo do cérebro, deixando a pessoa em estado de alerta e euforia. Diminuem o sono e o cansaço, mas elevam os batimentos cardíacos.</li>
+                        <li><strong>Alucinógenas</strong>Também chamadas de perturbadoras. Alteram a percepção da realidade, fazendo o cérebro ver, ouvir ou sentir coisas de forma desordenada.</li>
                     </ul>
                 </div>
 
                 <!-- SLIDE 4 -->
                 <div class="study-slide" data-slide="3">
-                    <span class="slide-tag">Fatores de Risco</span>
-                    <h2>Por que o uso acontece?</h2>
-                    <p>Diversos fatores podem influenciar a aproximação de uma pessoa com drogas.</p>
+                    <span class="slide-tag">Consequências / Fatores de risco</span>
+                    <h2>Dependência</h2>
                     <ul>
-                        <li><strong>Individuais</strong>Curiosidade, busca por prazer ou fuga de problemas.</li>
-                        <li><strong>Sociais</strong>Pressão de grupo, ambiente familiar e acesso facilitado.</li>
-                        <li><strong>Psicológicos</strong>Ansiedade, depressão e outros sofrimentos emocionais.</li>
+                        <li><strong>Como Surge</strong>O uso frequente altera o cérebro, transformando o consumo em um impulso incontrolável.</li>
+                        <li><strong>Tolerância</strong>O cérebro se acostuma com a substância, exigindo doses cada vez maiores para gerar o mesmo efeito.</li>
+                        <li><strong>Abstinência</strong>Conjunto de sintomas físicos e mentais (ansiedade, tremores, mal-estar) que surgem ao interromper o uso.</li>
+                        <li><strong>Dependência Física x Psicológica</strong>A física ocorre quando o corpo precisa da droga para funcionar; a psicológica é a necessidade emocional e o desejo incontrolável da mente.</li>
                     </ul>
                 </div>
 
                 <!-- SLIDE 5 -->
                 <div class="study-slide" data-slide="4">
-                    <span class="slide-tag">Prevenção</span>
-                    <h2>Prevenção e onde buscar ajuda</h2>
-                    <p>Informação, diálogo e apoio são as principais ferramentas de prevenção.</p>
+                    <span class="slide-tag">Detecção / Diagnóstico</span>
+                    <h2>Teste Toxicológico</h2>
                     <ul>
-                        <li><strong>Diálogo aberto</strong>Conversar sem julgamento em casa e na escola.</li>
-                        <li><strong>Redes de apoio</strong>Família, amigos e profissionais de saúde.</li>
-                        <li><strong>CAPS e CVV</strong>Serviços públicos de apoio e escuta (188 - Centro de Valorização da Vida).</li>
+                        <li><strong>Como Funciona</strong>Analisa amostras de cabelo, pelo, urina ou sangue para identificar resíduos de substâncias eliminadas ou acumuladas pelo organismo.</li>
+                        <li><strong>O que Detecta</strong>Identifica o uso de drogas ilícitas (maconha, cocaína, anfetaminas, ecstasy, opioides) e alguns medicamentos controlados.</li>
+                        <li><strong>Tempo de Detecção</strong>Varia pelo tipo de exame — poucas horas a dias na urina e no sangue, e até 90 a 180 dias em amostras de cabelo e pelos.</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 6 -->
+                <div class="study-slide" data-slide="5">
+                    <span class="slide-tag">Comparação / Comportamento</span>
+                    <h2>Drogas x Celular</h2>
+                    <p>O celular gera uma dependência comportamental (hábito sem intoxicação do corpo), enquanto as drogas causam dependência química direta e danos tóxicos ao organismo.</p>
+                    <ul>
+                        <li><strong>Sistema de Recompensa</strong>Ambos ativam a mesma região do cérebro; likes e notificações geram gratificação instantânea, assim como o uso de substâncias.</li>
+                        <li><strong>Dopamina</strong>A cada interação no celular, o cérebro libera picos curtos de dopamina, criando um ciclo contínuo de busca por novidades e prazer imediato.</li>
+                        <li><strong>Uso Compulsivo</strong>A busca repetida pela sensação de recompensa pode levar à perda de controle, ansiedade e dificuldade de ficar desconectado.</li>
+                    </ul>
+                </div>
+
+                <!-- SLIDE 7 -->
+                <div class="study-slide" data-slide="6">
+                    <span class="slide-tag">Prevenção / Conclusão</span>
+                    <h2>Prevenção e Conclusão</h2>
+                    <ul>
+                        <li><strong>Informação</strong>O conhecimento científico é a melhor ferramenta de prevenção, ajudando a tomar decisões conscientes e desmistificar mitos sobre o uso de drogas.</li>
+                        <li><strong>Consequências</strong>O uso contínuo traz danos à saúde física e mental, além de afetar relacionamentos, estudos e o futuro pessoal.</li>
+                        <li><strong>Tratamento e Ajuda</strong>A dependência é uma doença e tem tratamento. Buscar apoio médico, psicológico e familiar é fundamental para a recuperação.</li>
                     </ul>
                 </div>
             </div>
@@ -483,15 +533,16 @@
                 <span class="lives" id="lives">❤️❤️❤️</span>
             </div>
 
-            <div class="question-card" id="question-text">
-                Carregando questão...
+            <div class="question-card">
+                <img id="question-image" class="question-image" style="display:none;" alt="Imagem da pergunta">
+                <div id="question-text">Carregando questão...</div>
             </div>
 
             <div class="options-grid" id="options-container">
                 <!-- Preenchido via JavaScript -->
             </div>
 
-            <button class="btn btn-secondary" style="padding: 10px; font-size: 0.85rem;" onclick="showFormulasFromGame()">📖 Ver Guia de Fórmulas</button>
+            <button class="btn btn-secondary" style="padding: 10px; font-size: 0.85rem;" onclick="showFormulasFromGame()">📖 Ver Guia de Estudo</button>
         </div>
 
         <!-- TELA DE GAME OVER -->
@@ -574,58 +625,54 @@
         const questionBank = [
             {
                 level: "Iniciante",
-                text: "O álcool é classificado como uma droga:",
-                options: ["Depressora do sistema nervoso central", "Estimulante do sistema nervoso central"],
+                text: "O que é uma droga?",
+                options: ["Uma substância que altera o corpo ou o cérebro", "Apenas uma substância ilegal"],
                 correct: 0
             },
             {
                 level: "Iniciante",
-                text: "A cafeína é um exemplo de droga:",
-                options: ["Estimulante", "Depressora"],
+                text: "O que as drogas alteram primeiro no cérebro?",
+                options: ["A comunicação entre neurônios", "O tamanho do cérebro"],
                 correct: 0
             },
             {
                 level: "Iniciante",
-                text: "O tabaco é uma droga:",
-                options: ["Lícita (permitida por lei)", "Ilícita (proibida por lei)"],
+                text: "Qual destes é um tipo de droga?",
+                options: ["Estimulante", "Digestiva"],
                 correct: 0
             },
             {
                 level: "Intermediário",
-                text: "O LSD é classificado como uma droga:",
-                options: ["Perturbadora (alucinógena) do sistema nervoso central", "Depressora do sistema nervoso central"],
+                text: "O que é tolerância?",
+                options: ["Precisar de doses maiores para sentir o mesmo efeito", "Depressora do sistema nervoso central"],
                 correct: 0
             },
             {
                 level: "Intermediário",
-                text: "A cocaína é classificada como droga:",
-                options: ["Estimulante", "Depressora"],
+                text: "Qual material pode ser usado em um teste toxicológico?",
+                options: ["Cabelo", "Unha postiça"],
                 correct: 0
             },
             {
                 level: "Intermediário",
-                text: "Segundo a Organização Mundial da Saúde, uma droga é:",
-                options: ["Qualquer substância que altera o funcionamento do corpo ou da mente", "Apenas as substâncias consideradas ilegais"],
-                correct: 0
+                text: "Celular e drogas são a mesma coisa?",
+                options: ["Sim, são iguais", "Não, mas ambos podem ativar o sistema de recompensa"],
+                correct: 1
             },
             {
                 level: "Avançado",
-                text: "Um dos principais fatores de risco sociais para o uso de drogas é:",
-                options: ["Pressão do grupo de amigos", "Prática regular de esportes"],
+                text: "Qual neurotransmissor está mais relacionado ao sistema de recompensa ativado por muitas drogas?",
+                options: ["Dopamina", "Hemoglobina"],
                 correct: 0
             },
             {
-                level: "Avançado",
-                text: "Diante de um caso de dependência química, buscar ajuda profissional é:",
-                options: ["Um passo importante e recomendado", "Desnecessário, a pessoa deve resolver sozinha"],
-                correct: 0
+                level: "Impossível",
+                text: "O Lucas pode ser considerado uma Droga?",
+                image: "https://cdn.discordapp.com/attachments/1485971742101999616/1539994693331583057/20260819_162920.jpg?ex=6a885752&is=6a8705d2&hm=c0a67af9acd6c956a9a0f7b3642883a00bbb8534aff380eb10006a42dd49f58e",
+                options: ["Sim", "Com Certeza","Sem Dúvidas"],
+                correct: 3
             },
-            {
-                level: "Avançado",
-                text: "O CVV (Centro de Valorização da Vida), serviço de apoio emocional, atende pelo número:",
-                options: ["188", "190"],
-                correct: 0
-            }
+            
         ];
 
         function showFormulas() {
@@ -693,6 +740,15 @@
             document.getElementById('level-badge').innerText = qData.level;
             document.getElementById('question-text').innerHTML = qData.text;
             document.getElementById('progress-indicator').innerText = `Questão ${questionsAnswered + 1}/${TOTAL_QUESTIONS}`;
+
+            // ↓ NOVO: mostra/esconde a imagem da pergunta
+            const imgEl = document.getElementById('question-image');
+            if (qData.image) {
+                imgEl.src = qData.image;
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
 
             generateOptions(qData.options, qData.correct);
         }
