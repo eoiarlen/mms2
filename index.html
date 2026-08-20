@@ -390,7 +390,7 @@
         <div id="start-screen" class="screen active">
             <div class="dev-tag">Grupo 1</div>
             <h1>Outras Drogas</h1>
-            <img src="/img/drogas.png" alt="drugs" class="image-drug">
+            <img src="https://cdn.discordapp.com/attachments/1485971742101999616/1539795164808216576/drogas.png?ex=6a879d7f&is=6a864bff&hm=60416fbd1a160026b481be7973772c445dbc332d41db55f1c19f59c44e7b42d3" alt="drugs" class="image-drug">
             <p>Teste seus conhecimentos sobre drogas e relacionados.</p>
             <button class="btn" onclick="showFormulas()">📖 Estudar Sobre</button>
             <button class="btn btn-secondary" onclick="startGame()">Começar Desafio Direto</button>
@@ -478,6 +478,7 @@
         <div id="game-screen" class="screen">
             <div class="game-header">
                 <span id="level-badge" class="badge">Iniciante</span>
+                <span id="progress-indicator">Questão 1/5</span>
                 <span>Pontos: <strong id="score">0</strong></span>
                 <span class="lives" id="lives">❤️❤️❤️</span>
             </div>
@@ -515,6 +516,19 @@
         let gameWasActive = false;
         let currentSlide = 0;
         const totalSlides = document.querySelectorAll('.study-slide').length;
+
+        const TOTAL_QUESTIONS = 5;
+        let sessionQuestions = [];
+        let questionsAnswered = 0;
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
 
         function renderDots() {
             const dotsContainer = document.getElementById('slide-dots');
@@ -650,6 +664,8 @@
 
             score = 0;
             lives = 3;
+            questionsAnswered = 0;
+            sessionQuestions = shuffleArray(questionBank).slice(0, TOTAL_QUESTIONS);
             updateUI();
             
             document.getElementById('start-screen').classList.remove('active');
@@ -666,11 +682,17 @@
         }
 
         function loadNextQuestion() {
-            const qData = questionBank[Math.floor(Math.random() * questionBank.length)];
+            if (questionsAnswered >= TOTAL_QUESTIONS) {
+                endGame();
+                return;
+            }
+
+            const qData = sessionQuestions[questionsAnswered];
             currentQuestion = qData;
 
             document.getElementById('level-badge').innerText = qData.level;
             document.getElementById('question-text').innerHTML = qData.text;
+            document.getElementById('progress-indicator').innerText = `Questão ${questionsAnswered + 1}/${TOTAL_QUESTIONS}`;
 
             generateOptions(qData.options, qData.correct);
         }
@@ -695,6 +717,7 @@
         function checkAnswer(selectedIndex, correctIndex, buttonElement) {
             const buttons = document.querySelectorAll('.option-btn');
             buttons.forEach(b => b.disabled = true);
+            questionsAnswered++;
 
             if (selectedIndex === correctIndex) {
                 buttonElement.classList.add('correct');
@@ -722,7 +745,7 @@
         function endGame() {
             document.getElementById('game-screen').classList.remove('active');
             document.getElementById('gameover-screen').classList.add('active');
-            document.getElementById('final-score').innerText = score;
+            document.getElementById('final-score').innerText = `${score}/100`;
         }
 
         // Inicializa os controles do carrossel de estudo
