@@ -306,6 +306,15 @@
             text-align: left;
         }
 
+        .slide-image {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            margin-bottom: 14px;
+        }
+
         .study-slide p {
             text-align: left;
             font-size: 0.9rem;
@@ -337,6 +346,39 @@
             font-size: 0.9rem;
         }
 
+        /* Expande mostrando um vídeo do YouTube no hover (usado só em itens específicos) */
+        .video-reveal {
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .video-reveal:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-embed-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+        }
+
+        .video-reveal:hover .video-embed-wrapper {
+            max-height: 220px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        .video-embed-wrapper iframe {
+            width: 100%;
+            height: 200px;
+            border: 0;
+            border-radius: 10px;
+            display: block;
+        }
+
         .palavras ul {
             display: grid;
             grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
@@ -348,6 +390,35 @@
         .palavras li {
         background: none !important;
         text-align: center;
+        }
+
+        .palavras li {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .palavras li:hover {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .palavras li .drug-card-img {
+            display: block;
+            width: 100%;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+        }
+
+        .palavras li:hover .drug-card-img {
+            max-height: 140px;
+            opacity: 1;
+            margin-top: 10px;
         }
         .slide-nav {
             display: flex;
@@ -435,14 +506,14 @@
                     <p>Segundo a Organização Mundial da Saúde, <u>droga é qualquer substância que não é produzida pelo corpo e que muda o seu jeito de funcionar, seja no corpo ou na mente.</u></p>
                     <div class="palavras">
                         <ul>
-                        <li><strong>Cafeína </strong></li>
-                        <li><strong>Álcool</strong></li>
-                        <li><strong>Nicotina</strong></li>
-                        <li><strong>Cannabis</strong></li>
-                        <li><strong>Cocaína</strong></li>
-                        <li><strong>Crack</strong></li>
-                        <li><strong>MDMA</strong></li>
-                        <li><strong>LSD</strong></li>
+                        <li><strong>Cafeína</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540153917093191761/5XKJNF7BXVD5BKN7BM25EDHORA.png?ex=6a88eb9c&is=6a879a1c&hm=9d140fd30c3480a94977df4b035a870d42d964d941cc0fe2e32ee7297aec86a4" alt="Cafeína"></li>
+                        <li><strong>Álcool</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540154424423612447/Consumo-de-drogas-e-alcool-representa-risco-a-saude-vascular.png?ex=6a88ec15&is=6a879a95&hm=775770421399399192350241744737c2c44ca203674b9e1bec1978e76bf4c2c9" alt="Álcool"></li>
+                        <li><strong>Nicotina</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540154777554657380/A-dependencia-de-nicotina-e-uma-doenca-cronica.png?ex=6a88ec69&is=6a879ae9&hm=701b22336150d173dd8e969bb14b857686fef042444e5e8e45d5712a61f16201" alt="Nicotina"></li>
+                        <li><strong>Cannabis</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540155308406743180/images.png?ex=6a88ece8&is=6a879b68&hm=579e6abff8818b5e0a8e1ded1ded05622cbf4fb52f8052a8557e4f384a1515b0" alt="Cannabis"></li>
+                        <li><strong>Cocaína</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540155895747448923/90172663_thinkstockphotos-537817268.jpg.png?ex=6a88ed74&is=6a879bf4&hm=13666eae396ca90bccebc27481c0793df359180bf642c9f247291ebb1b12a5b9" alt="Cocaína"></li>
+                        <li><strong>Crack</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540156701481762946/IMAGEM_NOTICIA_1.png?ex=6a88ee34&is=6a879cb4&hm=f7c01b0f0e0aadbf32dcbc34b776ee443fa2c2376662d989d2204f347138777f" alt="Crack"></li>
+                        <li><strong>MDMA</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540169503940284496/xtc-pillen-mdma-kristal.png?ex=6a88fa20&is=6a87a8a0&hm=d0390d823d2a4b136b13062bd101fcc017d8b3e8d6a26892aa935e6d3846a1c2" alt="MDMA"></li>
+                        <li><strong>LSD</strong><img class="drug-card-img" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540169158870962197/images.png?ex=6a88f9ce&is=6a87a84e&hm=087689fdddd770d8dca5ffed194584e8abeb7e7a81ca82ab9c81c1c5811c8bbe" alt="LSD"></li>
                         </ul>
                     </div>
                 </div>
@@ -455,7 +526,11 @@
                     <ul>
                         <li><strong>Neurônios</strong>As drogas alteram a comunicação entre as células nervosas, enviando sinais falsos ou sobrecarregando os circuitos do cérebro.</li>
                         <li><strong>Neurotransmissores</strong>Causam picos descontrolados de substâncias químicas como a dopamina (prazer) e desregulam o GABA/Glutamato (foco e controle motor).</li>
-                        <li><strong>Sistema de Recompensa</strong>O cérebro é "enganado" e entende a droga como prioridade para a sobrevivência. Com o tempo, perde o autocontrole e exige doses cada vez maiores (tolerância).</li>
+                        <li class="video-reveal"><strong>Sistema de Recompensa</strong>O cérebro é "enganado" e entende a droga como prioridade para a sobrevivência. Com o tempo, perde o autocontrole e exige doses cada vez maiores (tolerância).
+                            <div class="video-embed-wrapper">
+                                <iframe src="https://www.youtube.com/embed/3D7akOFUqbs?si=r-i9U6xSEOYcxJUU" title="Nuggets" allowfullscreen></iframe>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -463,6 +538,7 @@
                 <div class="study-slide" data-slide="2">
                     <span class="slide-tag">Classificação / Efeitos</span>
                     <h2>Tipos de Drogas e seus Efeitos</h2>
+                    <img class="slide-image" src="https://cdn.discordapp.com/attachments/1485971742101999616/1540167241448816692/psicoativos.png?ex=6a88f805&is=6a87a685&hm=35211f59c740f9ab10f79f0a815873fbaf22e32b26bc2b0e7db951941cdb8437" alt="Tipos de Drogas e seus Efeitos">
                     <!--<p></p>--->
                     <ul>
                         <li><strong>Depressoras</strong>Diminuem a atividade do Sistema Nervoso Central. Desaceleram o pensamento, os reflexos e geram sensação de calma, sonolência e lentidão.</li>
@@ -670,7 +746,7 @@
                 text: "O Lucas pode ser considerado uma Droga?",
                 image: "https://cdn.discordapp.com/attachments/1485971742101999616/1539994693331583057/20260819_162920.jpg?ex=6a885752&is=6a8705d2&hm=c0a67af9acd6c956a9a0f7b3642883a00bbb8534aff380eb10006a42dd49f58e",
                 options: ["Sim", "Com Certeza","Sem Dúvidas"],
-                correct: 3
+                correct: -1
             },
             
         ];
